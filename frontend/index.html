@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just an Inchident</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('./skysports-charles-leclerc-ferrari_4653955.jpg') no-repeat center center fixed; 
+            background-size: cover;
+            color: #e1e1e1;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); 
+            z-index: -1;
+        }
+
+        header {
+            background: linear-gradient(to right, #ff1801, #870000);
+            padding: 15px 0;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .section-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+            background: rgba(41, 41, 41, 0.4);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .section h3 {
+            color: #ff1801;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.3); 
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: background 0.3s, border 0.3s;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6); 
+        }
+
+        input:focus {
+            background: rgba(0, 0, 0, 0.7); 
+            border-color: #ff1801; 
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background: #ff1801;
+            padding: 10px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #b31217;
+        }
+
+        .results-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .result-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background: rgba(41, 41, 41, 0.4);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .result-box h3 {
+            color: #ff1801;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            color: #aaa;
+            font-size: 0.9rem;
+            background: #0d0d0d;
+        }
+
+        footer a {
+            color: #ff1801;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Just an Inchident...</h1>
+        <p>Calculate the fastest tire strategies for your race</p>
+    </header>
+
+    <div class="container">
+        <form id="apiForm">
+            <div class="section-container">
+                <div class="section">
+                    <h3>Race Details</h3>
+                    <label for="total_laps">Total Laps</label>
+                    <input type="number" id="total_laps" name="total_laps" placeholder="e.g., 52" required>
+
+                    <label for="pit_stop_time">Pit Stop Time (seconds)</label>
+                    <input type="number" id="pit_stop_time" name="pit_stop_time" placeholder="e.g., 25" required>
+                </div>
+
+                <div class="section">
+                    <h3>Tire Life</h3>
+                    <label for="s_life">Soft Tire Life (laps)</label>
+                    <input type="number" id="s_life" name="s_life" placeholder="e.g., 12" required>
+
+                    <label for="m_life">Medium Tire Life (laps)</label>
+                    <input type="number" id="m_life" name="m_life" placeholder="e.g., 25" required>
+
+                    <label for="h_life">Hard Tire Life (laps)</label>
+                    <input type="number" id="h_life" name="h_life" placeholder="e.g., 40" required>
+                </div>
+
+                <div class="section">
+                    <h3>Tire Degradation</h3>
+                    <label for="s_degradation">Soft Tire Degradation (per lap)</label>
+                    <input type="number" step="0.01" id="s_degradation" name="s_degradation" placeholder="e.g., 0.2" required>
+
+                    <label for="m_degradation">Medium Tire Degradation (per lap)</label>
+                    <input type="number" step="0.01" id="m_degradation" name="m_degradation" placeholder="e.g., 0.15" required>
+
+                    <label for="h_degradation">Hard Tire Degradation (per lap)</label>
+                    <input type="number" step="0.01" id="h_degradation" name="h_degradation" placeholder="e.g., 0.1" required>
+                </div>
+
+                <div class="section">
+                    <h3>Tire Speed</h3>
+                    <label for="s_fastest_lap">Soft Tire Fastest Lap (seconds)</label>
+                    <input type="number" step="0.01" id="s_fastest_lap" name="s_fastest_lap" placeholder="e.g., 82.5" required>
+
+                    <label for="m_fastest_lap">Medium Tire Fastest Lap (seconds)</label>
+                    <input type="number" step="0.01" id="m_fastest_lap" name="m_fastest_lap" placeholder="e.g., 84.0" required>
+
+                    <label for="h_fastest_lap">Hard Tire Fastest Lap (seconds)</label>
+                    <input type="number" step="0.01" id="h_fastest_lap" name="h_fastest_lap" placeholder="e.g., 85.5" required>
+                </div>
+            </div>
+            <button type="submit">Calculate Strategy</button>
+        </form>
+
+        <div class="results-container">
+            <div class="result-box">
+                <h3>One-Stop Strategies</h3>
+                <div id="oneStopResults"></div>
+            </div>
+
+            <div class="result-box">
+                <h3>Two-Stop Strategies</h3>
+                <div id="twoStopResults"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Powered by <a href="https://www.formula1.com" target="_blank">Formula 1</a> | Fan-made Tool | Siddhesh Jadhav
+    </footer>
+
+    <script>
+        document.getElementById('apiForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const jsonData = {};
+
+            formData.forEach((value, key) => {
+                jsonData[key] = isNaN(value) || value === '' ? value : parseFloat(value);
+            });
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/optimize-strategy/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonData),
+                });
+
+                const result = await response.json();
+
+                document.getElementById('oneStopResults').innerHTML = '';
+                document.getElementById('twoStopResults').innerHTML = '';
+
+                if (result.one_stop_strategies) {
+                    result.one_stop_strategies.forEach((strategy, index) => {
+                        document.getElementById('oneStopResults').innerHTML += `
+                            <div class="result-item">
+                                <strong>Strategy ${index + 1}:</strong> Tires: ${strategy.tires.join(' -> ')} | Pit Stops: ${strategy.pit_stops.join(', ')} | Time: ${strategy.time.toFixed(2)} seconds
+                            </div>
+                        `;
+                    });
+                }
+
+                
+                if (result.two_stop_strategies) {
+                    result.two_stop_strategies.forEach((strategy, index) => {
+                        document.getElementById('twoStopResults').innerHTML += `
+                            <div class="result-item">
+                                <strong>Strategy ${index + 1}:</strong> Tires: ${strategy.tires.join(' -> ')} | Pit Stops: ${strategy.pit_stops.join(', ')} | Time: ${strategy.time.toFixed(2)} seconds
+                            </div>
+                        `;
+                    });
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        });
+    </script>
+</body>
+</html>
